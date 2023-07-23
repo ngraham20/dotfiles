@@ -23,7 +23,9 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 import XMonad.Layout.Spacing
+import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.DraggingVisualizer
+import XMonad.Layout.ToggleLayouts
 import XMonad.Actions.TiledWindowDragging
 
 -- The preferred terminal program, which is used in a binding below and by
@@ -96,9 +98,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "rofi -show combi")
 
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
-
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
 
@@ -158,6 +157,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+
+       -- custom
+    , ((modm              , xK_f     ), sendMessage (Toggle "Full"))
     ]
     ++
 
@@ -219,13 +221,12 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-mySpacedLayout = spacingRaw False (Border 0 10 10 10) True (Border 10 10 10 10) True $ myDraggingLayout
+mySpacedLayout = spacingRaw True (Border 10 10 10 10) True (Border 10 10 10 10) True
 myDraggingLayout = draggingVisualizer $ myLayout
-myLayout = tiled ||| Mirror tiled ||| Full
+myLayout = toggleLayouts (noBorders Full) (tiled ||| Mirror tiled)
   where
     -- default tiling algorithm partitions the screen into two panes
-    tiled   = Tall nmaster delta ratio
-
+    tiled   = mySpacedLayout $ Tall nmaster delta ratio
     -- The default number of windows in the master pane
     nmaster = 1
 
@@ -330,7 +331,7 @@ defaults = def {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = mySpacedLayout
+        layoutHook         = myDraggingLayout
         -- manageHook         = myManageHook,
         -- handleEventHook    = myEventHook,
         -- logHook            = myLogHook,
