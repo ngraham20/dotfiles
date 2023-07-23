@@ -221,12 +221,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-mySpacedLayout = spacingRaw True (Border 10 10 10 10) True (Border 10 10 10 10) True
 myDraggingLayout = draggingVisualizer $ myLayout
 myLayout = toggleLayouts (noBorders Full) (tiled ||| Mirror tiled)
   where
     -- default tiling algorithm partitions the screen into two panes
-    tiled   = mySpacedLayout $ Tall nmaster delta ratio
+    tiled   = spacingRaw False (Border 10 10 10 10) True (Border 10 10 10 10) True $ Tall nmaster delta ratio
     -- The default number of windows in the master pane
     nmaster = 1
 
