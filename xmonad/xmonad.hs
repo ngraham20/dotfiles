@@ -30,6 +30,7 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.DraggingVisualizer
 import XMonad.Layout.ToggleLayouts
+import XMonad.Layout.Reflect (reflectHoriz)
 import XMonad.Actions.TiledWindowDragging
 
 -- The preferred terminal program, which is used in a binding below and by
@@ -50,7 +51,7 @@ myBorderWidth   = 1
 -- ("right alt"), which does not conflict with emacs keybindings. The
 -- "windows key" is usually mod4Mask.
 --
-myModMask       = mod1Mask
+myModMask       = mod4Mask
 
 -- NOTE: from 0.9.1 on numlock mask is set automatically. The numlockMask
 -- setting should be removed from configs.
@@ -164,6 +165,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
        -- custom
     , ((modm              , xK_f     ), sendMessage (Toggle "Full"))
+    , ((modm .|. shiftMask, xK_l     ), spawn "i3lock -i ~/Pictures/Wallpapers/anime-girl-city.png -k")
     ]
     ++
 
@@ -226,7 +228,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- which denotes layout choice.
 --
 myDraggingLayout = draggingVisualizer $ myLayout
-myLayout = toggleLayouts (noBorders Full) (tiled ||| Mirror tiled)
+myLayout = toggleLayouts (noBorders Full) (tiled ||| Mirror tiled ||| reflectHoriz tiled)
   where
     -- default tiling algorithm partitions the screen into two panes
     tiled   = spacingRaw False (Border 10 10 10 10) True (Border 10 10 10 10) True $ Tall nmaster delta ratio
