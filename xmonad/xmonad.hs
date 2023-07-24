@@ -22,6 +22,10 @@ import System.Exit
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+import Graphics.X11.ExtraTypes.XF86
+
+import XMonad.Util.EZConfig
+
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders (noBorders, smartBorders)
 import XMonad.Layout.DraggingVisualizer
@@ -31,7 +35,7 @@ import XMonad.Actions.TiledWindowDragging
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "xfce4-terminal"
+myTerminal      = "kitty"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -335,4 +339,8 @@ defaults = def {
         -- handleEventHook    = myEventHook,
         -- logHook            = myLogHook,
         -- startupHook        = myStartupHook
-    }
+    } `additionalKeysP`
+      [ (("<XF86AudioRaiseVolume>"), spawn "amixer set Master 3%+")
+      , (("<XF86AudioLowerVolume>"), spawn "amixer set Master 3%-")
+      , (("<XF86AudioMute>"), spawn "amixer set Master toggle")
+      ]
