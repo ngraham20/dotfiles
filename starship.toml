@@ -4,20 +4,24 @@
 add_newline = false
 # │
 # ├
+# └─
+# ┤
+# ╼
+# ╢
+# ║
 format = """
-([┌───────────────────](bold green)
-([│](bold green)\
+(([┌╢ ](bold green)\
 $git_branch\
 $git_commit\
 $git_state\
 $git_metrics\
 $git_status\n)\
-([│](bold green)\
+([│║ ](bold green)\
 $rust\
 $python\
 $golang\
-$haskell\n))\
-$directory$character
+$haskell\n)\
+[└╢ ](bold green))$directory$character
 """
 
 [cmd_duration]
