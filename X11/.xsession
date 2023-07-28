@@ -1,6 +1,6 @@
 #!/bin/bash
 
 picom & disown
-feh --bg-scale Pictures/Wallpapers/anime-girl-city.webp
 wal -R
+# wal --backend colorthief -i ~/Pictures/Wallpapers/anime-girl-city.webp
 export PATH=$PATH:~/.local/bin
