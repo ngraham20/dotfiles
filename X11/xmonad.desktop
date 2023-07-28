@@ -1,4 +1,4 @@
 [Desktop Entry]
 Name=XMonad
 Type=Application
-Exec=/home/sbr/.local/bin/xmonad
+Exec=$HOME/.local/bin/xmonad

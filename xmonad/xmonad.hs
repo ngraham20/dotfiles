@@ -14,20 +14,23 @@
 --
 -- http://www.haskell.org/haskellwiki/Xmonad/Notable_changes_since_0.8
 --
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Redundant bracket" #-}
+{-# OPTIONS_GHC -Wno-missing-signatures #-}
 
 import XMonad
-import Data.Monoid
+-- import Data.Monoid
 import System.Exit
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-import Graphics.X11.ExtraTypes.XF86
+-- import Graphics.X11.ExtraTypes.XF86
 
 import XMonad.Util.EZConfig
 
 import XMonad.Layout.Spacing
-import XMonad.Layout.NoBorders (noBorders, smartBorders)
+import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.DraggingVisualizer
 import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.Reflect (reflectHoriz)
@@ -158,7 +161,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
-    , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
+    , ((modm .|. shiftMask, xK_q     ), io (exitSuccess))
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
@@ -169,9 +172,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
     ++
 
-    --
-    -- mod-[1..9], Switch to workspace N
-    --
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     --
@@ -180,10 +180,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
 
-    --
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
-    --
+  
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
         | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
@@ -192,7 +191,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
+myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 
     -- mod-button1, Set the window to floating mode and move by dragging
     [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
@@ -227,7 +226,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myDraggingLayout = draggingVisualizer $ myLayout
+myDraggingLayout = draggingVisualizer myLayout
 myLayout = toggleLayouts (noBorders Full) (tiled ||| Mirror tiled ||| reflectHoriz tiled)
   where
     -- default tiling algorithm partitions the screen into two panes
@@ -319,6 +318,7 @@ main = xmonad defaults
 --
 -- No need to modify this.
 --
+
 defaults = def {
       -- simple stuff
         terminal           = myTerminal,
@@ -342,7 +342,7 @@ defaults = def {
         -- logHook            = myLogHook,
         -- startupHook        = myStartupHook
     } `additionalKeysP`
-      [ (("<XF86AudioRaiseVolume>"), spawn "amixer set Master 3%+")
-      , (("<XF86AudioLowerVolume>"), spawn "amixer set Master 3%-")
-      , (("<XF86AudioMute>"), spawn "amixer set Master toggle")
+      [ ("<XF86AudioRaiseVolume>", spawn "amixer set Master 3%+")
+      , ("<XF86AudioLowerVolume>", spawn "amixer set Master 3%-")
+      , ("<XF86AudioMute>", spawn "amixer set Master toggle")
       ]
