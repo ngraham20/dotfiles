@@ -34,3 +34,6 @@ An alternative to `auto-cpufreq` would be `power-profiles-daemon`, which would a
 
 ### picom
 the version of picom that I use is https://github.com/jonaburg/picom
+
+### Audio Management
+`$ easyeffects --gapplication-service & disown`
