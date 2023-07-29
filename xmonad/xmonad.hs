@@ -168,7 +168,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
        -- custom
     , ((modm              , xK_f     ), sendMessage (Toggle "Full"))
-    , ((modm .|. shiftMask, xK_l     ), spawn "betterlockscreen -l")
+    , ((modm .|. shiftMask, xK_l     ), spawn "betterlockscreen -l --off 20")
     ]
     ++
 
