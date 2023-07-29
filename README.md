@@ -3,6 +3,7 @@
 
 ### Fonts
 The community QTile version of EndeavourOS does not have all the fonts necessary to use `Starship` or even `Discord`. You will need to install `noto-fonts`, `noto-fonts-emoji`, and `noto-fonts-extra`. Optionally `noto-fonts-cjk` for east Asian characters as well.
+On the desktop, I have been using NotoSansMonoBold
 
 ### Installation
 This will eventually be automated, but for now, make sure the following files are copied into their proper places, and symlinks are created.
