@@ -31,3 +31,6 @@ An alternative to `auto-cpufreq` would be `power-profiles-daemon`, which would a
 
 ### Screenshots
 `Flameshot` is awesome
+
+### picom
+the version of picom that I use is https://github.com/jonaburg/picom
