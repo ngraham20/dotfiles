@@ -28,3 +28,6 @@ The program `auto-cpufreq (AUR)` is an automatic CPU speed and power optimizer f
 An alternative to `auto-cpufreq` would be `power-profiles-daemon`, which would allow manual choice between performance modes. This option may be preferable. **THIS IS AWESOME**
 
 `power-profiles-daemon (powerprofilesctl)` is what comes with `qtile`, so it's already installed on EndeavourOS. The command `powerprofilesctl` can get, set, and *temporarily change profiles for the duration of a program*
+
+### Screenshots
+`Flameshot` is awesome
