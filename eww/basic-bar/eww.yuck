@@ -60,6 +60,7 @@
 (defwindow bar
   :monitor 0
   :windowtype "dock"
+  :stacking "bg"
   :geometry (geometry :x "0%"
                       :y "7px"
                       :width "100%"
@@ -70,20 +71,22 @@
 
 (defwindow leftbar
   :windowtype "dock"
+  :stacking "bg"
   :geometry (geometry :x "0%"
                       :y "7px"
                       :width "13%"
                       :height "35px"
                       :anchor "top left")
-  :reserve (struts :side "top" :distance "0%")
+  :reserve (struts :side "top" :distance "3%")
   (workspaces))
 
 (defwindow rightbar
   :windowtype "dock"
+  :stacking "bg"
   :geometry (geometry :x "0%"
                       :y "7px"
                       :width "13%"
                       :height "35px"
                       :anchor "top right")
-  :reserve (struts :side "top" :distance "0%")
+  :reserve (struts :side "top" :distance "3%")
   (sidestuff))

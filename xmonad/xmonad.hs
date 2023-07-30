@@ -230,11 +230,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myDraggingLayout = avoidStruts $ draggingVisualizer myLayout
+myDraggingLayout = draggingVisualizer myLayout
 myLayout = toggleLayouts (noBorders Full) (avoidStruts(tiled ||| Mirror tiled ||| reflectHoriz tiled))
   where
     -- default tiling algorithm partitions the screen into two panes
-    tiled   = spacingRaw False (Border 40 10 10 10) True (Border 10 10 10 10) True $ Tall nmaster delta ratio
+    tiled   = spacingRaw False (Border 0 10 10 10) True (Border 10 10 10 10) True $ Tall nmaster delta ratio
     -- The default number of windows in the master pane
     nmaster = 1
 
@@ -267,6 +267,7 @@ myLayout = toggleLayouts (noBorders Full) (avoidStruts(tiled ||| Mirror tiled ||
 myManageHook = composeAll
   [
     checkDock --> doLower
+    -- isFullscreen --> doFullFloat
   ]
 
 ------------------------------------------------------------------------
