@@ -33,11 +33,14 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders (noBorders)
 import XMonad.Layout.DraggingVisualizer
 import XMonad.Layout.ToggleLayouts
+    ( ToggleLayout(Toggle), toggleLayouts )
 import XMonad.Layout.Reflect (reflectHoriz)
+import XMonad.Layout.Fullscreen (fullscreenSupport, fullscreenManageHook)
 import XMonad.Actions.TiledWindowDragging
 
-import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageDocks (avoidStruts, docks, checkDock)
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen, doLower)
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -228,10 +231,10 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 -- which denotes layout choice.
 --
 myDraggingLayout = avoidStruts $ draggingVisualizer myLayout
-myLayout = toggleLayouts (noBorders Full) (tiled ||| Mirror tiled ||| reflectHoriz tiled)
+myLayout = toggleLayouts (noBorders Full) (avoidStruts(tiled ||| Mirror tiled ||| reflectHoriz tiled))
   where
     -- default tiling algorithm partitions the screen into two panes
-    tiled   = spacingRaw False (Border 10 10 10 10) True (Border 10 10 10 10) True $ Tall nmaster delta ratio
+    tiled   = spacingRaw False (Border 40 10 10 10) True (Border 10 10 10 10) True $ Tall nmaster delta ratio
     -- The default number of windows in the master pane
     nmaster = 1
 
@@ -261,6 +264,10 @@ myLayout = toggleLayouts (noBorders Full) (tiled ||| Mirror tiled ||| reflectHor
 --     , className =? "Gimp"           --> doFloat
 --     , resource  =? "desktop_window" --> doIgnore
 --     , resource  =? "kdesktop"       --> doIgnore ]
+myManageHook = composeAll
+  [
+    checkDock --> doLower
+  ]
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -311,7 +318,7 @@ myLayout = toggleLayouts (noBorders Full) (tiled ||| Mirror tiled ||| reflectHor
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad $ ewmh $ docks defaults
+main = xmonad $ docks $ ewmh defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
@@ -337,8 +344,8 @@ defaults = def {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myDraggingLayout
-        -- manageHook         = myManageHook,
+        layoutHook         = myDraggingLayout,
+        manageHook         = myManageHook
         -- handleEventHook    = myEventHook,
         -- logHook            = myLogHook,
         -- startupHook        = myStartupHook
