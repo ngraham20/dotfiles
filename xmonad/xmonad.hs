@@ -36,9 +36,11 @@ import XMonad.Layout.ToggleLayouts
 import XMonad.Layout.Reflect (reflectHoriz)
 import XMonad.Actions.TiledWindowDragging
 
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.EwmhDesktops
+
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
---
 myTerminal      = "kitty"
 
 -- Whether focus follows the mouse pointer.
@@ -46,7 +48,6 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
 -- Width of the window border in pixels.
---
 myBorderWidth   = 1
 
 -- modMask lets you specify which modkey you want to use. The default
@@ -226,7 +227,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myDraggingLayout = draggingVisualizer myLayout
+myDraggingLayout = avoidStruts $ draggingVisualizer myLayout
 myLayout = toggleLayouts (noBorders Full) (tiled ||| Mirror tiled ||| reflectHoriz tiled)
   where
     -- default tiling algorithm partitions the screen into two panes
@@ -310,7 +311,7 @@ myLayout = toggleLayouts (noBorders Full) (tiled ||| Mirror tiled ||| reflectHor
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad defaults
+main = xmonad $ ewmh $ docks defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will

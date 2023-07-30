@@ -37,3 +37,5 @@ the version of picom that I use is https://github.com/jonaburg/picom
 
 ### Audio Management
 `$ easyeffects --gapplication-service & disown`
+### wmctrl
+`wmctrl` is a program that makes workspaces work in bars
