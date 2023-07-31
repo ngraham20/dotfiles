@@ -1,3 +1,7 @@
+### Configuring EWW
+EWW uses GTK-3.0 to style, meaning that the GTK documentation
+will help for configuring the theme: https://docs.gtk.org/gtk3/
+
 ### XSessions
 - Make a symbolic link from `.dotfiles/X11/xmonad.desktop` to `/usr/share/xsessions/xmonad.desktop`
 
