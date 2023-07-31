@@ -1,0 +1,41 @@
+(defvar eww "/usr/local/bin/eww -c $HOME/.config/eww")
+(defvar mytext "nohover")
+(defvar isrevealed "false")
+(defwindow bar
+  :stacking "bg"
+  :windowtype "dock"
+  :reserve (struts :distance "4%" :side "top")
+  :geometry (geometry
+              :width "100%"
+              :height "30px")
+  (volslider))
+
+(defwidget volslider []
+  (eventbox
+    :class "volslider"
+    :onhover "${eww} update isrevealed=true"
+    :onhoverlost "${eww} update isrevealed=false"
+    :halign "end"
+    (box
+      :spacing 0
+      :space-evenly "false"
+      :class "testbox"
+      (label :class "audio-icon" :text "")
+      (revealer
+        :class "second"
+        :transition "slideleft"
+        :duration "550ms"
+        :reveal "${isrevealed}"
+        (volbar)))))
+
+(defpoll current-volume :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+(defwidget volbar []
+(scale
+  :class "volbar"
+  :halign "center"  
+  :value current-volume
+  :orientation "h"  
+  :tooltip "Volume: ${current-volume}%" 
+  :max 101 
+  :min 0 
+  :onchange "amixer -D pulse sset Master {}%" ))
