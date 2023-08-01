@@ -1,34 +1,56 @@
 (defvar eww "/usr/local/bin/eww -c $HOME/.config/eww")
 (defvar mytext "nohover")
-(defvar isrevealed "false")
+(defvar volume_revealed "false")
+(defvar bright_revealed "false")
 (defwindow bar
   :stacking "bg"
   :windowtype "dock"
   :reserve (struts :distance "4%" :side "top")
   :geometry (geometry
-              :width "100%"
-              :height "30px")
-  (volslider))
+              :width "90%"
+              :height "30px"
+              :anchor "top center")
+  (box
+    :class "sliders"
+    :spacing 0
+    :halign "end"
+    :space-evenly "false"
+    (brislider)
+    (volslider)))
 
 (defwidget volslider []
   (eventbox
-    :class "volslider"
-    :onhover "${eww} update isrevealed=true"
-    :onhoverlost "${eww} update isrevealed=false"
-    :halign "end"
+    :onhover "${eww} update volume_revealed=true"
+    :onhoverlost "${eww} update volume_revealed=false"
     (box
       :spacing 0
       :space-evenly "false"
-      :class "testbox"
+      :class "volslider"
       (label :class "audio-icon" :text "")
       (revealer
-        :class "second"
-        :transition "slideleft"
+        :transition "slideright"
         :duration "550ms"
-        :reveal "${isrevealed}"
+        :reveal "${volume_revealed}"
         (volbar)))))
 
+
+(defwidget brislider []
+  (eventbox
+    :onhover "${eww} update bright_revealed=true"
+    :onhoverlost "${eww} update bright_revealed=false"
+    (box
+      :spacing 0
+      :space-evenly "false"
+      :class "brightslider"
+      (label :class "bright-icon" :text "")
+      (revealer
+        :transition "slideright"
+        :duration "550ms"
+        :reveal "${bright_revealed}"
+        (brightbar)))))
+
 (defpoll current-volume :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+(defpoll current-brightness :interval "1s" "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
 (defwidget volbar []
 (scale
   :class "volbar"
@@ -39,3 +61,14 @@
   :max 101 
   :min 0 
   :onchange "amixer -D pulse sset Master {}%" ))
+
+(defwidget brightbar []
+(scale
+  :class "brightbar"
+  :halign "center"  
+  :value current-brightness
+  :orientation "h"  
+  :tooltip "Brightness: ${current-brightness}%" 
+  :max 101 
+  :min 0 
+  :onchange "brightnessctl set {}%" ))

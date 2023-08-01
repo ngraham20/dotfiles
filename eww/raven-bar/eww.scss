@@ -23,36 +23,62 @@ $white: $foreground;
   border-radius: 0px;
 }
 
-.first {
-  background-color: rgb(165, 190, 223);
-  color: #464040;
-}
+// .first {
+//   background-color: rgb(165, 190, 223);
+//   color: #464040;
+// }
 
-.second {
-  background-color: rgb(50, 80, 124);
-  color: #ebf1ff;
+// .second {
+//   background-color: rgb(50, 80, 124);
+//   color: #ebf1ff;
   // border-radius: 40px;
   // border-color: rgb(201, 255, 185);
   // border-width: 2px;
   // border-style: solid;
+// }
+
+.sliders {
+  border-color: $green;
+  border-radius: 15px;
+  border-style: solid;
+  border-width: 2px;
+  padding-right: 10px;
 }
 
 .audio-icon {
   font-size: 20px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
   color: $magenta;
+  // border-color: $magenta $background $magenta $magenta;
+  // border-radius: 15px 0px 0px 15px;
+  // border-style: solid;
+  // border-width: 2px;
+}
+
+.bright-icon {
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: $yellow;
+  // border-color: $magenta $background $magenta $magenta;
+  // border-radius: 15px 0px 0px 15px;
+  // border-style: solid;
+  // border-width: 2px;
+}
+
+.brightbar highlight {
+  background-color: $yellow;
+  border-radius: 5px;
 }
 
 .volbar highlight {
   background-color: $magenta;
   border-radius: 5px;
-}
-
-.volslider {
-  padding-right: 10px;
 }
 
 scale {
