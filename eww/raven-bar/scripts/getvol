@@ -1,2 +1,17 @@
 #!/bin/sh
-amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1
+numeric() {
+  amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1
+}
+
+icon() {
+  num=$(numeric)
+  if [[ "$num" -gt "0" ]]; then
+    echo ""
+  else
+    echo "󰖁"
+  fi
+}
+
+if [[ "$1" == "icon" ]]; then
+  icon
+fi

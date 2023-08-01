@@ -2,6 +2,11 @@
 (defvar mytext "nohover")
 (defvar volume_revealed "false")
 (defvar bright_revealed "false")
+
+(defpoll current-volume :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
+(defpoll current-brightness :interval "1s" "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
+(defpoll volume_icon :interval "1s" "scripts/getvol icon")
+
 (defwindow bar
   :stacking "bg"
   :windowtype "dock"
@@ -26,7 +31,7 @@
       :spacing 0
       :space-evenly "false"
       :class "volslider"
-      (label :class "audio-icon" :text "")
+      (label :class "audio-icon" :text volume_icon)
       (revealer
         :transition "slideright"
         :duration "550ms"
@@ -49,8 +54,6 @@
         :reveal "${bright_revealed}"
         (brightbar)))))
 
-(defpoll current-volume :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
-(defpoll current-brightness :interval "1s" "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
 (defwidget volbar []
 (scale
   :class "volbar"
