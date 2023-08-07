@@ -1,5 +1,5 @@
 (defvar eww "/usr/local/bin/eww -c $HOME/.config/eww")
-(defvar mytext "nohover")
+
 (defvar volume_revealed "false")
 (defvar bright_revealed "false")
 
@@ -10,6 +10,9 @@
 (defpoll time_hour :interval "1s" "date '+%H'")
 (defpoll time_minute :interval "1s" "date '+%M'")
 
+(defpoll battery_icon :interval "1s" "scripts/battery icon")
+(defpoll battery_percent :interval "1s" "scripts/battery percent")
+
 (defwindow bar
   :stacking "bg"
   :windowtype "dock"
@@ -19,9 +22,30 @@
               :height "30px"
               :anchor "top center")
   (centerbox
-  (label :text "")
+  (barleft)
   (clock)
-  (sliders)))
+  (barright)))
+
+(defwidget barleft []
+  (box))
+
+(defwidget barcenter []
+  (box))
+
+(defwidget barright []
+  (box
+    :halign "end"
+    :spacing 10
+    :space-evenly "false"
+    (sliders)
+    (battery)))
+
+(defwidget battery []
+  (box
+    :spacing 5
+    :space-evenly "false"
+    (label :class "battery" :text battery_icon)
+    (label :class "battery-percent" :text "${battery_percent}%")))
 
 (defwidget sliders []
   (box

@@ -26,6 +26,18 @@ $white: $foreground;
   background-color: $background;
   font-size: 20px;
 }
+
+.battery {
+  background-color: $background;
+  font-size: 20px;
+}
+
+.battery-percent {
+  font-size: 17px;
+  padding-right: 10px;
+
+}
+
 // .first {
 //   background-color: rgb(165, 190, 223);
 //   color: #464040;
