@@ -7,14 +7,23 @@
 (defpoll current-brightness :interval "1s" "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
 (defpoll volume_icon :interval "1s" "scripts/getvol icon")
 
+(defpoll time_hour :interval "1s" "date '+%H'")
+(defpoll time_minute :interval "1s" "date '+%M'")
+
 (defwindow bar
   :stacking "bg"
   :windowtype "dock"
-  :reserve (struts :distance "4%" :side "top")
+  :reserve (struts :distance "3.5%" :side "top")
   :geometry (geometry
               :width "90%"
               :height "30px"
               :anchor "top center")
+  (centerbox
+  (label :text "")
+  (clock)
+  (sliders)))
+
+(defwidget sliders []
   (box
     :class "sliders"
     :spacing 0
@@ -22,6 +31,15 @@
     :space-evenly "false"
     (brislider)
     (volslider)))
+
+(defwidget clock []
+  (box
+    :class "clock"
+    :spacing 3
+    :space-evenly "false"
+    (label :text time_hour)
+    (label :text ":")
+    (label :text time_minute)))
 
 (defwidget volslider []
   (eventbox
@@ -55,23 +73,23 @@
         (brightbar)))))
 
 (defwidget volbar []
-(scale
-  :class "volbar"
-  :halign "center"  
-  :value current-volume
-  :orientation "h"  
-  :tooltip "Volume: ${current-volume}%" 
-  :max 101 
-  :min 0 
-  :onchange "amixer -D pulse sset Master {}%" ))
+  (scale
+    :class "volbar"
+    :halign "center"  
+    :value current-volume
+    :orientation "h"  
+    :tooltip "Volume: ${current-volume}%" 
+    :max 101 
+    :min 0 
+    :onchange "amixer -D pulse sset Master {}%" ))
 
 (defwidget brightbar []
-(scale
-  :class "brightbar"
-  :halign "center"  
-  :value current-brightness
-  :orientation "h"  
-  :tooltip "Brightness: ${current-brightness}%" 
-  :max 101 
-  :min 0 
-  :onchange "brightnessctl set {}%" ))
+  (scale
+    :class "brightbar"
+    :halign "center"  
+    :value current-brightness
+    :orientation "h"  
+    :tooltip "Brightness: ${current-brightness}%" 
+    :max 101 
+    :min 0 
+    :onchange "brightnessctl set {}%" ))
