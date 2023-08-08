@@ -3,28 +3,41 @@
 }
 
 // Variable Color's
-$background: #1A1B26;
+$background: rgba(27, 28, 39, 0.5);
+$background-layer: rgba(27, 28, 39, 0.5);
 $foreground: #A9B1D6;
 
 $black: #24283B;
 $gray: #565F89;
 $red: #F7768E;
-$orange: #ffbc57;
+$orange: #ffa32b;
 $green: #73DACA;
 $yellow: #E0AF68;
 $blue: #7AA2F7;
-$magenta: #BB9AF7;
+$magenta: #9d68ff;
 $cyan: #7DCFFF;
 $white: $foreground;
 //Global Styles
 .bar {
   background-color: $background;
   padding: 10px;
-  border-radius: 0px;
+  border-radius: 5px;
+}
+
+.powermenu {
+  border-radius: 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: $magenta;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .clock {
-  background-color: $background;
+  background-color: $background-layer;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 15px;
   font-size: 20px;
   font-family: 'Orbitron';
   font-weight:  700;
@@ -43,7 +56,6 @@ $white: $foreground;
 }
 
 .battery-icon {
-  background-color: $background;
   color: $orange;
   font-size: 20px;
 }
@@ -55,7 +67,7 @@ $white: $foreground;
 }
 
 .sliders {
-  border-color: $green;
+  border-color: $cyan;
   border-radius: 15px;
   border-style: solid;
   border-width: 2px;
@@ -68,7 +80,7 @@ $white: $foreground;
   padding-right: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
-  color: $magenta;
+  color: $cyan;
 }
 
 .bright-icon {
@@ -77,22 +89,21 @@ $white: $foreground;
   padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
-  color: $yellow;
+  color: $cyan;
 }
 
 .brightbar highlight {
-  background-color: $yellow;
+  background-color: $cyan;
   border-radius: 5px;
 }
 
 .volbar highlight {
-  background-color: $magenta;
+  background-color: $cyan;
   border-radius: 5px;
 }
 
 scale {
   all: unset;
-  background-color:$background;
   border-radius: 5px;
   min-height: 10px;
   min-width: 80px;

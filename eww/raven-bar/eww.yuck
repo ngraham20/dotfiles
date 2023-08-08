@@ -1,4 +1,5 @@
 (defvar eww "/usr/local/bin/eww -c $HOME/.config/eww")
+(defvar endeavour-icon "/home/nathaniel/.dotfiles/assets/endeavouros-icon.png")
 
 (defvar volume_revealed "false")
 (defvar bright_revealed "false")
@@ -28,7 +29,19 @@
   (barright)))
 
 (defwidget barleft []
-  (box))
+  (button
+    :onclick "notify-send 'Clicked!' 'You clicked the button!'"
+    (powermenu)))
+
+(defwidget powermenu []
+  (box
+    :class "powermenu"
+    :spacing 5
+    :halign "start"
+    :space-evenly "false"
+    (image :path endeavour-icon
+      :image-width 25
+      :image-height 25)))
 
 (defwidget barcenter []
   (box))
