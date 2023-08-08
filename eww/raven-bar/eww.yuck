@@ -2,6 +2,7 @@
 
 (defvar volume_revealed "false")
 (defvar bright_revealed "false")
+(defvar battery_revealed "false")
 
 (defpoll current-volume :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
 (defpoll current-brightness :interval "1s" "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
@@ -35,16 +36,17 @@
 (defwidget barright []
   (box
     :halign "end"
-    :spacing 10
+    :spacing 5
     :space-evenly "false"
     (sliders)
     (battery)))
 
 (defwidget battery []
   (box
+    :class "battery"
     :spacing 5
     :space-evenly "false"
-    (label :class "battery" :text battery_icon)
+    (label :class "battery-icon" :text battery_icon)
     (label :class "battery-percent" :text "${battery_percent}%")))
 
 (defwidget sliders []
@@ -62,8 +64,23 @@
     :spacing 3
     :space-evenly "false"
     (label :text time_hour)
-    (label :text ":")
+    (label :text "" :class "separator")
     (label :text time_minute)))
+  
+(defwidget batslider []
+  (eventbox
+    :onhover "${eww} update battery_revealed=true"
+    :onhoverlost "${eww} update battery_revealed=false"
+    (box
+      :spacing 0
+      :space-evenly "false"
+      :class "battery-slider"
+      (label :class "battery-icon" :text battery_icon)
+      (revealer
+        :transition "slideright"
+        :duration "550ms"
+        :reveal "${battery_revealed}"
+        (label :class "battery-percent" :text "${battery_percent}%")))))
 
 (defwidget volslider []
   (eventbox
@@ -89,7 +106,7 @@
       :spacing 0
       :space-evenly "false"
       :class "brightslider"
-      (label :class "bright-icon" :text "")
+      (label :class "bright-icon" :text "󰖨")
       (revealer
         :transition "slideright"
         :duration "550ms"
@@ -113,7 +130,6 @@
     :halign "center"  
     :value current-brightness
     :orientation "h"  
-    :tooltip "Brightness: ${current-brightness}%" 
     :max 101 
     :min 0 
     :onchange "brightnessctl set {}%" ))

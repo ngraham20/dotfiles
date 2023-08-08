@@ -5,6 +5,7 @@ picom & disown
 wal -R
 # wal --backend colorthief -i ~/Pictures/Wallpapers/anime-girl-city.webp
 eww daemon
+eww open bar &
 #polybar & disown
 #nm-applet & disown
 #eww open leftbar
