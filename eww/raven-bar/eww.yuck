@@ -16,6 +16,9 @@
 (defpoll battery_icon :interval "1s" "scripts/battery icon")
 (defpoll battery_percent :interval "1s" "scripts/battery percent")
 
+(deflisten workspaces "scripts/workspaces")
+
+
 (defwindow bar
   :stacking "bg"
   :windowtype "dock"
@@ -25,15 +28,19 @@
               :height "30px"
               :anchor "top center")
   (centerbox
-  (barleft)
+  (powermenu)
   (clock)
   (barright)))
 
 (defwidget barleft []
   (powermenu))
 
+(defwidget workspaces []
+  (literal :content workspaces))
+
 (defwidget powermenu []
   (eventbox
+    :halign "start"
     :onhover "${eww} update powermenu_revealed=true"
     :onhoverlost "${eww} update powermenu_revealed=false"
     (box
