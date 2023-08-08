@@ -4,6 +4,7 @@
 (defvar volume_revealed "false")
 (defvar bright_revealed "false")
 (defvar battery_revealed "false")
+(defvar powermenu_revealed "false")
 
 (defpoll current-volume :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
 (defpoll current-brightness :interval "1s" "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
@@ -18,7 +19,7 @@
 (defwindow bar
   :stacking "bg"
   :windowtype "dock"
-  :reserve (struts :distance "3.5%" :side "top")
+  :reserve (struts :distance "4%" :side "top")
   :geometry (geometry
               :width "90%"
               :height "30px"
@@ -29,19 +30,58 @@
   (barright)))
 
 (defwidget barleft []
-  (button
-    :onclick "notify-send 'Clicked!' 'You clicked the button!'"
-    (powermenu)))
+  (powermenu))
 
 (defwidget powermenu []
-  (box
-    :class "powermenu"
-    :spacing 5
-    :halign "start"
-    :space-evenly "false"
-    (image :path endeavour-icon
+  (eventbox
+    :onhover "${eww} update powermenu_revealed=true"
+    :onhoverlost "${eww} update powermenu_revealed=false"
+    (box
+      :class "powermenu"
+      :spacing 0
+      :halign "start"
+      :space-evenly "false"
+      (endeavour)
+      (revealer
+        :transition "slideleft"
+        :duration "550ms"
+        :reveal powermenu_revealed
+        (box
+          :space-evenly "false"
+          :spacing 15
+          (shutdown)
+          (restart)
+          (suspend)
+          (logout))))))
+  
+(defwidget endeavour []
+  (image :path endeavour-icon
       :image-width 25
-      :image-height 25)))
+      :image-height 25))
+
+(defwidget shutdown []
+  (button
+    :class "shutdown"
+    :onclick "notify-send 'Power' 'Button will Power'"
+    (label :text "")))
+
+(defwidget restart []
+    (button
+      :class "restart"
+      :onclick "notify-send 'Power' 'Button will Restart'"
+      (label :text "")))
+
+(defwidget  suspend []
+    (button
+      :class "suspend"
+      :onclick "notify-send 'Power' 'Button will Suspend'"
+      (label :text "󰤄")))
+
+(defwidget logout []
+    (button
+      :class "logout"
+      :onclick "notify-send 'Power' 'Button will Logout'"
+      (label :text "󰗽")))
 
 (defwidget barcenter []
   (box))

@@ -33,6 +33,32 @@ $white: $foreground;
   padding-right: 20px;
 }
 
+.shutdown {
+  padding-left: 15px;
+  font-size: 25px;
+  font-weight: 900;
+  color: $red;
+}
+
+.restart {
+  font-size: 25px;
+  font-weight: 900;
+  color: $green;
+}
+
+.suspend {
+  font-size: 25px;
+  font-weight: 900;
+  color: $yellow;
+}
+
+.logout {
+  font-size: 25px;
+  font-weight: 900;
+  color: $cyan;
+  padding-right: 10px;
+}
+
 .clock {
   background-color: $background-layer;
   padding-left: 25px;
