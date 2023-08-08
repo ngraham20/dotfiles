@@ -28,15 +28,25 @@
               :height "30px"
               :anchor "top center")
   (centerbox
-  (powermenu)
+  (barleft)
   (clock)
   (barright)))
 
 (defwidget barleft []
-  (powermenu))
+  (box
+    :halign "start"
+    :space-evenly "false"
+    :spacing 5
+    (powermenu)
+    (workspaces)))
 
 (defwidget workspaces []
-  (literal :content workspaces))
+  (box
+    :class "workspace"
+    :halign "start"
+     (literal 
+      :valign "center"
+      :content workspaces)))
 
 (defwidget powermenu []
   (eventbox

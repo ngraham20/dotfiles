@@ -1,25 +1,43 @@
-#!/bin/bash
+#!/bin/sh
 
 workspaces() {
     un="0"
-    ws1=0
-    ws2=1
-    ws3=2
-    ws4=3
-    ws5=4
-    ws6=5
-    ws7=6
-    ws8=7
-    ws9=8
+    ws1=1
+    ws2=2
+    ws3=3
+    ws4=4
+    ws5=5
+    ws6=6
+    ws7=7
+    ws8=8
+    ws9=9
 
     # check if Occupied
-    occupied=$(wmctrl -l | awk '{print $2}'  | uniq | tr -d '\n')
+    occupied=$(wmctrl -l | awk '{print $2}'  | uniq)
+    o1=$(echo "$occupied" | grep $ws1)
+    o2=$(echo "$occupied" | grep $ws2)
+    o3=$(echo "$occupied" | grep $ws3)
+    o4=$(echo "$occupied" | grep $ws4)
+    o5=$(echo "$occupied" | grep $ws5)
+    o6=$(echo "$occupied" | grep $ws6)
+    o7=$(echo "$occupied" | grep $ws7)
+    o8=$(echo "$occupied" | grep $ws8)
+    o9=$(echo "$occupied" | grep $ws9)
 
     # check if focused
-    focused=$(wmctrl -d | awk '{if ($2=="*") print $1}')
+    focused=$(($(wmctrl -d | awk '{if ($2=="*") print $1}')+1))
+    f1=$(echo "$focused" | grep $ws1)
+    f2=$(echo "$focused" | grep $ws2)
+    f3=$(echo "$focused" | grep $ws3)
+    f4=$(echo "$focused" | grep $ws4)
+    f5=$(echo "$focused" | grep $ws5)
+    f6=$(echo "$focused" | grep $ws6)
+    f7=$(echo "$focused" | grep $ws7)
+    f8=$(echo "$focused" | grep $ws8)
+    f9=$(echo "$focused" | grep $ws9)
 
     # generate yuck
-echo "(box :class \"workspaces\" :space-evenly \"false\" :spacing \"10\" (button :class \"button1\" :onclick \"wmctrl -s $ws1\") \"1\" (button :class \"button2\" :onclick \"wmctrl -s $ws2\") \"2\" (button :class \"button3\" :onclick \"wmctrl -s $ws3\") \"3\" (button :class \"button4\" :onclick \"wmctrl -s $ws4\") \"4\" (button :class \"button5\" :onclick \"wmctrl -s $ws5\") \"5\" (button :class \"button6\" :onclick \"wmctrl -s $ws6\") \"6\" (button :class \"button7\" :onclick \"wmctrl -s $ws7\") \"7\" (button :class \"button8\" :onclick \"wmctrl -s $ws8\") \"8\" (button :class \"button9\" :onclick \"wmctrl -s $ws9\") \"9\")"
+echo "(box :class \"workspaces\" :space-evenly \"false\" :spacing \"10\" (button :class \"$un${o1:=0}$f1\" :onclick \"wmctrl -s $(($ws1-1))\" \"1\")  (button :class \"$un${o2:=0}$f2\" :onclick \"wmctrl -s $(($ws2-1))\" \"2\")  (button :class \"$un${o3:=0}$f3\" :onclick \"wmctrl -s $(($ws3-1))\" \"3\")  (button :class \"$un${o4:=0}$f4\" :onclick \"wmctrl -s $(($ws4-1))\" \"4\")  (button :class \"$un${o5:=0}$f5\" :onclick \"wmctrl -s $(($ws5-1))\" \"5\")  (button :class \"$un${o6:=0}$f6\" :onclick \"wmctrl -s $(($ws6-1))\" \"6\")  (button :class \"$un${o7:=0}$f7\" :onclick \"wmctrl -s $(($ws7-1))\" \"7\")  (button :class \"$un${o8:=0}$f8\" :onclick \"wmctrl -s $(($ws8-1))\" \"8\")  (button :class \"$un${o9:=0}$f9\" :onclick \"wmctrl -s $(($ws9-1))\" \"9\"))"
 }
 
 focused() {
@@ -30,5 +48,4 @@ workspaces
 while true
 do
 workspaces
-sleep 1
 done
