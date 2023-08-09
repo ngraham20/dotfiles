@@ -69,6 +69,7 @@
           (shutdown)
           (restart)
           (suspend)
+          (lockscreen)
           (logout))))))
   
 (defwidget endeavour []
@@ -79,25 +80,31 @@
 (defwidget shutdown []
   (button
     :class "shutdown"
-    :onclick "notify-send 'Power' 'Button will Power'"
+    :onclick "shutdown now"
     (label :text "")))
 
 (defwidget restart []
     (button
       :class "restart"
-      :onclick "notify-send 'Power' 'Button will Restart'"
+      :onclick "reboot"
       (label :text "")))
 
 (defwidget  suspend []
     (button
       :class "suspend"
-      :onclick "notify-send 'Power' 'Button will Suspend'"
+      :onclick "systemctl suspend"
       (label :text "󰤄")))
+
+  (defwidget lockscreen []
+    (button
+      :class "lockscreen"
+      :onclick "betterlockscreen -l"
+      (label :text "")))
 
 (defwidget logout []
     (button
       :class "logout"
-      :onclick "notify-send 'Power' 'Button will Logout'"
+      :onclick "pkill xmonad"
       (label :text "󰗽")))
 
 (defwidget barcenter []
