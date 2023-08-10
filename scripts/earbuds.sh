@@ -55,6 +55,8 @@ disconnect() {
 }
 
 poweroff() {
+  disconnect
+  sleep 1
   if [[ $power == "yes" ]]; then
     bluetoothctl power off
     power="no"
