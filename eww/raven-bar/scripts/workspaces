@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# TODO the updating of the workspace colors could be done with `defvar` and 
+# class changes instead, since the structure of the workspace section won't change
+
 workspaces() {
     un="-"
     ws1=0

@@ -132,6 +132,21 @@ $powermenu-icon-fontsize: 25px;
   padding-left: 10px;
 }
 
+.bt-off {
+  color: $gray;
+  font-size: 20px;
+}
+
+.bt-on {
+  color: $green;
+  font-size: 20px;
+}
+
+.bt-battery {
+  font-size: 17px;
+  padding-left: 7px;
+}
+
 .wifi {
   color: $green;
   font-size: 20px;

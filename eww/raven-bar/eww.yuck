@@ -19,6 +19,11 @@
 (defpoll wifi_icon :interval "1s" "scripts/wifi icon")
 (defpoll wifi_name :interval "1s" "scripts/wifi name")
 
+(defpoll bluetooth_icon :interval "1s" "scripts/bluetooth icon")
+(defpoll bluetooth_battery :interval "1s" "scripts/bluetooth battery" )
+(defpoll bluetooth_class :interval "1s" "scripts/bluetooth eww-class")
+(defpoll bluetooth_battery_reveal :interval "1s" "scripts/bluetooth eww-bat-reveal")
+
 (deflisten workspaces "scripts/workspaces")
 
 (defwindow bar
@@ -126,13 +131,22 @@
     :class "indicators"
     :spacing 10
     :space-evenly "false"
+    (bluetooth)
     (wifi)))
 
 (defwidget wifi []
   (label :class "wifi" :text wifi_icon :tooltip "Connected: ${wifi_name}"))
 
-;; (defwidget bluetooth []
-;;   (label :class "bluetooth" :text bluetooth_icon))
+(defwidget bluetooth []
+  (box
+    :space-evenly "false"
+    :spacing 0
+    (label :class bluetooth_class :text bluetooth_icon)
+    (revealer
+      :transition "slideleft"
+      :duration "550ms"
+      :reveal bluetooth_battery_reveal
+      (label :class "bt-battery" :text "${bluetooth_battery}%"))))
 
 (defwidget battery []
   (box

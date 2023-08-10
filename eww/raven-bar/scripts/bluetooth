@@ -20,8 +20,65 @@ device_name() {
   echo $(bluetoothctl info | grep "Name" | awk '{print $2}')
 }
 
-device_type() {
-  echo "todo"
+connected() {
+  local con=$(bluetoothctl info | grep "Missing device address argument")
+  if [ -z "$con" ]; then
+    echo "yes"
+  else
+    echo "no"
+  fi
+}
+
+icon() {
+  local con=$(connected)
+  if [ "$con" == "yes" ]; then
+    echo "󰂱"
+  else
+    echo "󰂯"
+  fi
+}
+
+battery_icon() {
+  local bat=$(device_battery)
+  if [[ $bat -gt 95 ]]; then
+    echo "󰥈"
+  elif [[ $bat -gt 85 ]]; then
+    echo "󰥆"
+  elif [[ $bat -gt 75 ]]; then
+    echo "󰥅"
+  elif [[ $bat -gt 65 ]]; then
+    echo "󰥄"
+  elif [[ $bat -gt 55 ]]; then
+    echo "󰥃"
+  elif [[ $bat -gt 45 ]]; then
+    echo "󰥂"
+  elif [[ $bat -gt 35 ]]; then
+    echo "󰥁"
+  elif [[ $bat -gt 25 ]]; then
+    echo "󰥀"
+  elif [[ $bat -gt 15 ]]; then
+    echo "󰤿"
+  elif [[ $bat -gt 10 ]]; then
+    echo "󰥇"
+  fi
+}
+
+eww_power_class() {
+  local eclass=$(powered)
+  if [ "$eclass" == "yes" ]; then
+    echo "bt-on"
+  else
+    echo "bt-off"
+  fi
+}
+
+eww_device_power_reveal() {
+  local bat=$(device_battery)
+  if [[ $bat -lt 20 ]]; then
+    echo "true"
+  else
+    echo "false"
+  fi
 }
 
 case $1 in
@@ -34,4 +91,15 @@ case $1 in
   "name") device_name
     ;;
   "battery") device_battery
+    ;;
+  "connected") connected
+    ;;
+  "icon" ) icon
+    ;;
+  "bat-icon") battery_icon
+    ;;
+  "eww-class") eww_power_class
+    ;;
+  "eww-bat-reveal") eww_device_power_reveal
+    ;;
 esac
