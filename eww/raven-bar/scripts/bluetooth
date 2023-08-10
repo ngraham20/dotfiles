@@ -74,6 +74,10 @@ eww_power_class() {
 
 eww_device_power_reveal() {
   local bat=$(device_battery)
+  if [[ -z $bat ]]; then
+    echo "false"; exit
+  fi
+  
   if [[ $bat -lt 20 ]]; then
     echo "true"
   else
