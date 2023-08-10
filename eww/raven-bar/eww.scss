@@ -18,7 +18,7 @@ $magenta: #9d68ff;
 $cyan: #7DCFFF;
 $white: $foreground;
 
-$workspace-fontsize: 20px;
+$workspace-fontsize: 22px;
 $powermenu-icon-fontsize: 25px;
 //Global Styles
 .bar {
@@ -37,8 +37,8 @@ $powermenu-icon-fontsize: 25px;
 }
 
 .workspace {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 1em;
+  padding-right: 1em;
   border-radius: 15px;
   border-width: 2px;
   border-style: solid;
@@ -49,23 +49,31 @@ $powermenu-icon-fontsize: 25px;
 .--- {
   color: $gray;
   font-size: $workspace-fontsize;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
 }
 
 // occupied
 .-\30- , .-\31-, .-\32-, .-\33-, .-\34-, .-\35-, .-\36-, .-\37-, .-\38- {
   color: $magenta;
   font-size: $workspace-fontsize;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
 }
 
 // focused
 .-\30 0 , .-\31 1, .-\32 2, .-\33 3, .-\34 4, .-\35 5, .-\36 6, .-\37 7, .-\38 8 {
   color: $green;
   font-size: $workspace-fontsize;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
 }
 
 .--\30 , .--\31, .--\32, .--\33, .--\34, .--\35, .--\36, .--\37, .--\38  {
   color: $orange;
   font-size: $workspace-fontsize;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
 }
 
 .shutdown {
@@ -113,6 +121,20 @@ $powermenu-icon-fontsize: 25px;
 
 .separator {
   font-weight: 900;
+}
+
+.indicators {
+  border-color: $green;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 15px;
+  padding-right: 18px;
+  padding-left: 10px;
+}
+
+.wifi {
+  color: $green;
+  font-size: 20px;
 }
 
 .battery {

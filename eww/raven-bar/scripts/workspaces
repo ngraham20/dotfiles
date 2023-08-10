@@ -38,12 +38,12 @@ workspaces() {
 
     # generate yuck
 echo "\
-(box :class \"workspaces\" :space-evenly \"true\" :spacing \"15\" \
+(box :class \"workspaces\" :space-evenly \"false\" :spacing \"0\" \
 (button :class \"$un${o1:=-}${f1:=-}\" :onclick \"wmctrl -s $ws1\" \"\")  \
 (button :class \"$un${o2:=-}${f2:=-}\" :onclick \"wmctrl -s $ws2\" \"󰈹\")  \
 (button :class \"$un${o3:=-}${f3:=-}\" :onclick \"wmctrl -s $ws3\" \"󰓓\")  \
-(button :class \"$un${o4:=-}${f4:=-}\" :onclick \"wmctrl -s $ws4\" \"4\")  \
-(button :class \"$un${o5:=-}${f5:=-}\" :onclick \"wmctrl -s $ws5\" \"5\")  \
+(button :class \"$un${o4:=-}${f4:=-}\" :onclick \"wmctrl -s $ws4\" \"󰺿\")  \
+(button :class \"$un${o5:=-}${f5:=-}\" :onclick \"wmctrl -s $ws5\" \"󰝚\")  \
 (button :class \"$un${o6:=-}${f6:=-}\" :onclick \"wmctrl -s $ws6\" \"6\")  \
 (button :class \"$un${o7:=-}${f7:=-}\" :onclick \"wmctrl -s $ws7\" \"7\")  \
 (button :class \"$un${o8:=-}${f8:=-}\" :onclick \"wmctrl -s $ws8\" \"8\")  \

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+powered() {
+  echo $(bluetoothctl show | grep "Powered" | awk '{print $2}')
+}
+
+discovering() {
+  echo $(bluetoothctl show | grep "Discovering" | awk '{print $2}')
+}
+
+pairable() {
+  echo $(bluetoothctl show | grep "Pairable" | awk '{print $2}')
+}
+
+device_battery() {
+  echo $(bluetoothctl info | grep "Battery Percentage" | awk '{print $4}') | tr -d "()"
+}
+
+device_name() {
+  echo $(bluetoothctl info | grep "Name" | awk '{print $2}')
+}
+
+device_type() {
+  echo "todo"
+}
+
+case $1 in
+  "powered") powered
+    ;;
+  "discovering") discovering
+    ;;
+  "pairable") pairable
+    ;;
+  "name") device_name
+    ;;
+  "battery") device_battery
+esac

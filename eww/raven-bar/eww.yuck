@@ -16,8 +16,10 @@
 (defpoll battery_icon :interval "1s" "scripts/battery icon")
 (defpoll battery_percent :interval "1s" "scripts/battery percent")
 
-(deflisten workspaces "scripts/workspaces")
+(defpoll wifi_icon :interval "1s" "scripts/wifi icon")
+(defpoll wifi_name :interval "1s" "scripts/wifi name")
 
+(deflisten workspaces "scripts/workspaces")
 
 (defwindow bar
   :stacking "bg"
@@ -115,8 +117,22 @@
     :halign "end"
     :spacing 5
     :space-evenly "false"
+    (indicators)
     (sliders)
     (battery)))
+
+(defwidget indicators []
+  (box
+    :class "indicators"
+    :spacing 10
+    :space-evenly "false"
+    (wifi)))
+
+(defwidget wifi []
+  (label :class "wifi" :text wifi_icon :tooltip "Connected: ${wifi_name}"))
+
+;; (defwidget bluetooth []
+;;   (label :class "bluetooth" :text bluetooth_icon))
 
 (defwidget battery []
   (box
