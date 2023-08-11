@@ -25,6 +25,7 @@
 (defpoll bluetooth_battery_reveal :interval "1s" "scripts/bluetooth eww-bat-reveal")
 
 (deflisten workspaces "scripts/workspaces")
+(deflisten powerprofiles "scripts/powerprofiles")
 
 (defwindow bar
   :stacking "bg"
@@ -160,20 +161,20 @@
 
 (defwidget profile-battery-saver []
   (button
-    :class "saver"
-    :onclick "powerprofilesctl set power-saver && notify-send 'Power Profiles' 'Profile set to POWER SAVER'"
+    :class power_saver
+    :onclick "powerprofilesctl set power-saver"
     (label :text "")))
 
 (defwidget profile-balanced []
   (button
-    :class "balanced"
-    :onclick "powerprofilesctl set balanced && notify-send 'Power Profiles' 'Profile set to BALANCED'"
+    :class balanced
+    :onclick "powerprofilesctl set balanced"
     (label :text "󰗑")))
 
 (defwidget profile-performance []
   (button
-    :class "performance"
-    :onclick "powerprofilesctl set performance && notify-send 'Power Profiles' 'Profile set to PERFORMANCE'"
+    :class performance
+    :onclick "powerprofilesctl set performance"
     (label :text "󱐋")))
 
 (defwidget battery []

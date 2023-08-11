@@ -1,0 +1,12 @@
+#!/bin/sh
+
+p=$(powerprofilesctl get | grep $1)
+if [[ -z $p ]]; then
+    echo "inactive"
+else
+    echo "active $1"
+fi
+
+if [[ $1 == "switch" ]]; then
+    switch $2
+fi

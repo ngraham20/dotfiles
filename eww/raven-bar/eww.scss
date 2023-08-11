@@ -51,7 +51,11 @@ $powermenu-icon-fontsize: 25px;
   font-size: $workspace-fontsize;
 }
 
-.saver {
+.inactive {
+  color: $gray;
+}
+
+.power-saver {
   color: $green;
 }
 
