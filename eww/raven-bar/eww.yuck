@@ -24,9 +24,10 @@
 (defpoll bluetooth_class :interval "1s" "scripts/bluetooth eww-class")
 (defpoll bluetooth_battery_reveal :interval "1s" "scripts/bluetooth eww-bat-reveal")
 
-(defpoll power_saver :interval "1s" "scripts/powerprofiles power-saver")
-(defpoll balanced :interval "1s" "scripts/powerprofiles balanced")
-(defpoll performance :interval "1s" "scripts/powerprofiles performance")
+(defvar power_saver "inactive")
+(defvar balanced "inactive")
+(defvar performance "inactive")
+(defvar power "scripts/powerprofiles")
 
 (deflisten workspaces "scripts/workspaces")
 
@@ -165,19 +166,19 @@
 (defwidget profile-battery-saver []
   (button
     :class power_saver
-    :onclick "powerprofilesctl set power-saver"
+    :onclick "${power} power-saver"
     (label :text "")))
 
 (defwidget profile-balanced []
   (button
     :class balanced
-    :onclick "powerprofilesctl set balanced"
+    :onclick "${power} balanced"
     (label :text "󰗑")))
 
 (defwidget profile-performance []
   (button
     :class performance
-    :onclick "powerprofilesctl set performance"
+    :onclick "${power} performance"
     (label :text "󱐋")))
 
 (defwidget battery []

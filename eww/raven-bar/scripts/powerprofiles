@@ -1,8 +1,25 @@
 #!/bin/sh
 
-p=$(powerprofilesctl get | grep $1)
-if [[ -z $p ]]; then
-    echo "inactive"
-else
-    echo "active $1"
-fi
+case $1 in
+    "power-saver")
+        powerprofilesctl set power-saver &
+        eww update power_saver="active power-saver" &
+        eww update balanced=inactive &
+        eww update performance=inactive &
+        notify-send 'Power Profiles' 'Profile set to POWER SAVER'
+        ;;
+    "balanced")
+        powerprofilesctl set balanced &
+        eww update power_saver=inactive &
+        eww update balanced="active balanced" &
+        eww update performance=inactive &
+        notify-send 'Power Profiles' 'Profile set to BALANCED'
+        ;;
+    "performance")
+        powerprofilesctl set performance &
+        eww update power_saver=inactive &
+        eww update balanced=inactive &
+        eww update performance="active performance" &
+        notify-send 'Power Profiles' 'Profile set to PERFORMANCE'
+        ;;
+esac
