@@ -18,8 +18,9 @@ $magenta: #9d68ff;
 $cyan: #7DCFFF;
 $white: $foreground;
 
-$workspace-fontsize: 22px;
+$workspace-fontsize: 23px;
 $powermenu-icon-fontsize: 25px;
+
 //Global Styles
 .bar {
   background-color: $background;
@@ -34,6 +35,32 @@ $powermenu-icon-fontsize: 25px;
   border-color: $magenta;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.power-profiles {
+  border-radius: 15px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: $cyan;
+  padding-left: 5px;
+}
+
+.power-profiles > * {
+  padding-left: 10px;
+  padding-right: 15px;
+  font-size: $workspace-fontsize;
+}
+
+.saver {
+  color: $green;
+}
+
+.balanced {
+  color: $blue;
+}
+
+.performance {
+  color: $yellow;
 }
 
 .workspace {

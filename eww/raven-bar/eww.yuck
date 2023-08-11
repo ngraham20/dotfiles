@@ -45,6 +45,7 @@
     :space-evenly "false"
     :spacing 5
     (powermenu)
+    (powerprofiles)
     (workspaces)))
 
 (defwidget workspaces []
@@ -147,6 +148,33 @@
       :duration "550ms"
       :reveal bluetooth_battery_reveal
       (label :class "bt-battery" :text "${bluetooth_battery}%"))))
+
+(defwidget powerprofiles []
+  (box
+    :class "power-profiles"
+    :space-evenly "false"
+    :spacing 0
+    (profile-battery-saver)
+    (profile-balanced)
+    (profile-performance)))
+
+(defwidget profile-battery-saver []
+  (button
+    :class "saver"
+    :onclick "powerprofilesctl set power-saver && notify-send 'Power Profiles' 'Profile set to POWER SAVER'"
+    (label :text "")))
+
+(defwidget profile-balanced []
+  (button
+    :class "balanced"
+    :onclick "powerprofilesctl set balanced && notify-send 'Power Profiles' 'Profile set to BALANCED'"
+    (label :text "󰗑")))
+
+(defwidget profile-performance []
+  (button
+    :class "performance"
+    :onclick "powerprofilesctl set performance && notify-send 'Power Profiles' 'Profile set to PERFORMANCE'"
+    (label :text "󱐋")))
 
 (defwidget battery []
   (box
