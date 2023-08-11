@@ -1,25 +1,58 @@
 #!/bin/sh
 
+update() {
+    case $1 in
+        "power-saver")
+            powerprofilesctl set power-saver &
+            eww_power_saver
+            notify-send 'Power Profiles' 'Profile set to POWER SAVER'
+            ;;
+        "balanced")
+            powerprofilesctl set balanced &
+            eww_balanced
+            notify-send 'Power Profiles' 'Profile set to BALANCED'
+            ;;
+        "performance")
+            powerprofilesctl set performance &
+            eww_performance
+            notify-send 'Power Profiles' 'Profile set to PERFORMANCE'
+            ;;
+    esac
+}
+
+eww_power_saver() {
+    eww update power_saver="active power-saver" &
+    eww update balanced=inactive &
+    eww update performance=inactive &
+}
+
+eww_balanced() {
+    eww update power_saver=inactive &
+    eww update balanced="active balanced" &
+    eww update performance=inactive &
+}
+
+eww_performance() {
+    eww update power_saver=inactive &
+    eww update balanced=inactive &
+    eww update performance="active performance" &
+}
+
+eww_get() {
+    while true; do
+        local p=$(powerprofilesctl get)
+        case $p in
+            "power-saver") eww_power_saver;;
+            "balanced") eww_balanced;;
+            "performance") eww_performance;;
+        esac
+        sleep 1
+    done
+}
+
 case $1 in
-    "power-saver")
-        powerprofilesctl set power-saver &
-        eww update power_saver="active power-saver" &
-        eww update balanced=inactive &
-        eww update performance=inactive &
-        notify-send 'Power Profiles' 'Profile set to POWER SAVER'
+    "update") update $2
         ;;
-    "balanced")
-        powerprofilesctl set balanced &
-        eww update power_saver=inactive &
-        eww update balanced="active balanced" &
-        eww update performance=inactive &
-        notify-send 'Power Profiles' 'Profile set to BALANCED'
-        ;;
-    "performance")
-        powerprofilesctl set performance &
-        eww update power_saver=inactive &
-        eww update balanced=inactive &
-        eww update performance="active performance" &
-        notify-send 'Power Profiles' 'Profile set to PERFORMANCE'
+    "get") eww_get
         ;;
 esac

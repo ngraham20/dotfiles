@@ -166,19 +166,19 @@
 (defwidget profile-battery-saver []
   (button
     :class power_saver
-    :onclick "${power} power-saver"
+    :onclick "${power} update power-saver"
     (label :text "")))
 
 (defwidget profile-balanced []
   (button
     :class balanced
-    :onclick "${power} balanced"
+    :onclick "${power} update balanced"
     (label :text "󰗑")))
 
 (defwidget profile-performance []
   (button
     :class performance
-    :onclick "${power} performance"
+    :onclick "${power} update performance"
     (label :text "󱐋")))
 
 (defwidget battery []
