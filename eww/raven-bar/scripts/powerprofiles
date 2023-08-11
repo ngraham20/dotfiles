@@ -6,7 +6,3 @@ if [[ -z $p ]]; then
 else
     echo "active $1"
 fi
-
-if [[ $1 == "switch" ]]; then
-    switch $2
-fi

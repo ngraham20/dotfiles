@@ -24,8 +24,11 @@
 (defpoll bluetooth_class :interval "1s" "scripts/bluetooth eww-class")
 (defpoll bluetooth_battery_reveal :interval "1s" "scripts/bluetooth eww-bat-reveal")
 
+(defpoll power_saver :interval "1s" "scripts/powerprofiles power-saver")
+(defpoll balanced :interval "1s" "scripts/powerprofiles balanced")
+(defpoll performance :interval "1s" "scripts/powerprofiles performance")
+
 (deflisten workspaces "scripts/workspaces")
-(deflisten powerprofiles "scripts/powerprofiles")
 
 (defwindow bar
   :stacking "bg"
