@@ -1,0 +1,8 @@
+#!/bin/sh
+
+p=$(ps -e | grep $1 | wc -l)
+if [ "$p" -gt "0" ]; then
+    echo "true"
+else
+    echo "false"
+fi

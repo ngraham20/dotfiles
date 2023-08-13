@@ -1,4 +1,4 @@
-(defvar eww "/usr/local/bin/eww -c $HOME/.config/eww")
+(defvar eww "/usr/local/bin/eww -c /home/nathaniel/.config/eww")
 (defvar endeavour-icon "/home/nathaniel/.dotfiles/assets/endeavouros-icon.png")
 
 (defvar volume_revealed "false")
@@ -120,6 +120,19 @@
       :onclick "pkill xmonad"
       (label :text "󰗽")))
 
+(defpoll discord-rev :initial "false" :interval "1s" "scripts/tasks Discord")
+(defpoll pcloud-rev :initial "false" :interval "1s" "scripts/tasks pcloud")
+(defpoll onepassword-rev :initial "false" :interval "1s" "scripts/tasks 1password")
+(defwidget tasks []
+  (box
+    :class "tasks"
+    :spacing 0
+    :space-evenly "false"
+    (box :class "discord" (revealer :transition "slideleft" :duration "550ms" :reveal discord-rev (image :image-width 25 :image-height 25 :path "/home/nathaniel/.dotfiles/assets/discord-icon.svg")))
+    (revealer :transition "slideleft" :duration "550ms" :reveal pcloud-rev (image :image-width 23 :image-height 23 :path "/home/nathaniel/.dotfiles/assets/pcloud-icon.svg"))
+    (revealer :transition "slideleft" :duration "550ms" :reveal onepassword-rev (image :image-width 23 :image-height 23 :path "/home/nathaniel/.dotfiles/assets/1password-icon.png"))
+    ))
+
 (defwidget barcenter []
   (box))
 
@@ -128,6 +141,7 @@
     :halign "end"
     :spacing 5
     :space-evenly "false"
+    (tasks)
     (indicators)
     (sliders)
     (battery)))

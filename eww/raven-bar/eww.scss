@@ -154,6 +154,16 @@ $powermenu-icon-fontsize: 25px;
   font-weight: 900;
 }
 
+.tasks > * {
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+}
+
+.tasks {
+  border-radius: 15px;
+  margin-left: 1px;
+}
+
 .indicators {
   border-color: $green;
   border-width: 2px;
