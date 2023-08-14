@@ -7,6 +7,7 @@ wal -R
 eww daemon
 eww open bar
 $HOME/.config/eww/current/scripts/powerprofiles get &
+pcloud &
 #polybar & disown
 #nm-applet & disown
 #eww open leftbar
