@@ -128,9 +128,21 @@
     :class "tasks"
     :spacing 0
     :space-evenly "false"
-    (box :class "discord" (revealer :transition "slideleft" :duration "550ms" :reveal discord-rev (image :image-width 25 :image-height 25 :path "/home/nathaniel/.dotfiles/assets/discord-icon.svg")))
-    (revealer :transition "slideleft" :duration "550ms" :reveal pcloud-rev (image :image-width 23 :image-height 23 :path "/home/nathaniel/.dotfiles/assets/pcloud-icon.svg"))
-    (revealer :transition "slideleft" :duration "550ms" :reveal onepassword-rev (image :image-width 23 :image-height 23 :path "/home/nathaniel/.dotfiles/assets/1password-icon.png"))
+    (revealer :transition "slideleft" :duration "550ms" :reveal discord-rev 
+    (button
+      :onclick "/usr/bin/discord"
+      :onrightclick "pkill Discord"
+      (image :image-width 25 :image-height 25 :path "/home/nathaniel/.dotfiles/assets/discord-icon.svg")))
+    (revealer :transition "slideleft" :duration "550ms" :reveal pcloud-rev 
+    (button
+      :onclick "/usr/bin/pcloud"
+      :onrightclick "pkill pcloud"
+      (image :image-width 23 :image-height 23 :path "/home/nathaniel/.dotfiles/assets/pcloud-icon.svg")))
+    (revealer :transition "slideleft" :duration "550ms" :reveal onepassword-rev
+      (button
+        :onclick "/usr/bin/1password &"
+        :onrightclick "pkill 1password"
+        (image :image-width 23 :image-height 23 :path "/home/nathaniel/.dotfiles/assets/1password-icon.png")))
     ))
 
 (defwidget barcenter []
