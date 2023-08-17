@@ -1,6 +1,6 @@
 #!/bin/sh
 
-wifi=$(nmcli -t device wifi list | grep "*" | awk -F ":" '{printf "%s %s", $8, $12}')
+wifi=$(nmcli -t device wifi list | grep "*")
 
 icon() {
   if [ -z "$wifi" ]; then
@@ -23,7 +23,7 @@ signal() {
     echo "Disconnected" && exit
     fi
 
-  echo $wifi | awk '{print $2}'
+  echo $wifi | awk -F ":" '{print $12}'
 }
 
 name() {
@@ -31,7 +31,7 @@ name() {
     echo "Disconnected" && exit
     fi
 
-  echo $wifi | awk '{print $1}'
+  echo $wifi | awk -F ":" '{print $8}'
 }
 
 case $1 in
