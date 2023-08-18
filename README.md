@@ -9,6 +9,8 @@ will help for configuring the theme: https://docs.gtk.org/gtk3/
 The community QTile version of EndeavourOS does not have all the fonts necessary to use `Starship` or even `Discord`. You will need to install `noto-fonts`, `noto-fonts-emoji`, and `noto-fonts-extra`. Optionally `noto-fonts-cjk` for east Asian characters as well.
 On the desktop, I have been using NotoSansMonoBold
 
+For some reason, the google fonts git AUR package breaks the noto-color-emoji font. When installing fonts on the new machine, don't use this package.
+
 ### Installation
 This will eventually be automated, but for now, make sure the following files are copied into their proper places, and symlinks are created.
 
