@@ -297,5 +297,5 @@
     :value current-brightness
     :orientation "h"  
     :max 101 
-    :min 0 
+    :min 5 
     :onchange "brightnessctl set {}%" ))
